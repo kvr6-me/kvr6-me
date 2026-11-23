@@ -1,0 +1,34 @@
+name: Update Git Koi
+
+on:
+  schedule:
+    # Runs every day just after midnight UTC
+    - cron: '15 0 * * *'
+  workflow_dispatch: # Allows you to run it manually anytime
+
+permissions:
+  contents: write # Needed so the workflow can save the koi GIF to your repo
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: git-profile-koi
+        uses: yalongwastaken/git-koi@v1.0.2
+        with:
+          body: white
+          output-dir: koi
+
+      - name: Commit the koi if it changed
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add koi/koi.gif
+          if ! git diff --cached --quiet; then
+            git commit -m "Update koi"
+            git push
+          fi
