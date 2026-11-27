@@ -1,4 +1,4 @@
-## Hi there 👋
+## Wazzab
 
 <!--
 **kvr6-me/kvr6-me** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
